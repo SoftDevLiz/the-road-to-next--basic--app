@@ -1,5 +1,5 @@
-const ticketsPage = () => {
+const TicketsPage = () => {
     return <div className="text-3xl p-4">Tickets</div>;
 };
 
-export default ticketsPage;
+export default TicketsPage;
