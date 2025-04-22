@@ -1,12 +1,14 @@
 
 type TicketPageProps = {
-    params: {
+    params: Promise<{
         ticketId: string;
-    };
+    }>;
 };
 
-const TicketPage = ({ params }: TicketPageProps) => {
-    return <div className="text-3xl p-4">Ticket number {params.ticketId}</div>;
+const TicketPage = async ({ params }: TicketPageProps) => {
+    const { ticketId } = await params;
+
+    return <div className="text-3xl p-4">Ticket number {ticketId}</div>;
 };
 
 export default TicketPage;
