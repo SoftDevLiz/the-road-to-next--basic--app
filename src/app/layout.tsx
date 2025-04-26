@@ -1,4 +1,5 @@
 import "./globals.css";
+import { LucideKanban } from "lucide-react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
@@ -43,10 +44,13 @@ export default function RootLayout({
           justify-between
         '>
           <div>
-              <Link href={homePath} className={buttonVariants({ variant: 'outline'})}>Home</Link>
+              <Link href={homePath} className={buttonVariants({ variant: 'ghost'})}>
+                <LucideKanban />
+                <h1 className='text-xl font-semibold'>TicketBounty</h1>
+              </Link>
           </div>
           <div>
-              <Link href={ticketsPath} className={buttonVariants({ variant: 'outline'})}>Tickets</Link>
+              <Link href={ticketsPath} className={buttonVariants({ variant: 'ghost'})}>Tickets</Link>
           </div>
         </nav>
         <main className='
