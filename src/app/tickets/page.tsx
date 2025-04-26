@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import clsx from 'clsx';
+import Link from 'next/link';
 import { initialTickets } from '@/data'
 import { ticketPath } from '@/paths';
 
@@ -24,7 +24,7 @@ const TicketsPage = () => {
             <div className='flex-1 flex flex-col items-center gap-y-4 animate-fade-from-top'>
                 {/* Loops over ticket data and renders individual tickets*/}
                 {initialTickets.map((ticket) => (
-                    <div key={ticket.id} className='w-full max-w-[420px] p-4 border border-slate-100 rounded'>
+                    <div key={ticket.id} className='w-full max-w-[420px] p-4 border border-slate-200 rounded'>
                         {/* [ticket.status] is mapped against TICKET_ICONS because the initialTickets holds the actual status of the ticket and TICKET_ICONS holds the related SVG */}
                         <h3>{TICKET_ICONS[ticket.status]}</h3>
                         <h3 className="text-lg truncate font-semibold">{ticket.title}</h3>

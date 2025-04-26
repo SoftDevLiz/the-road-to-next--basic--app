@@ -2,7 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button"
 import { homePath, ticketsPath } from '@/paths'
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,8 +42,12 @@ export default function RootLayout({
           px-5 
           justify-between
         '>
-          <Link href={homePath} className="text-4xl font-bold">Home</Link>
-          <Link href={ticketsPath} className="text-4xl font-bold">Tickets</Link>
+          <div>
+              <Link href={homePath} className={buttonVariants({ variant: 'outline'})}>Home</Link>
+          </div>
+          <div>
+              <Link href={ticketsPath} className={buttonVariants({ variant: 'outline'})}>Tickets</Link>
+          </div>
         </nav>
         <main className='
           min-h-screen 
