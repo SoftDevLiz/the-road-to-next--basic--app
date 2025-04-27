@@ -1,4 +1,4 @@
-import { LucideBriefcaseBusiness,LucideCircleCheckBig, LucideLoader } from 'lucide-react';
+import { LucideCircleCheck,LucideEye, LucideEyeClosed } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card' 
 import { Separator } from '@/components/ui/separator'
@@ -7,9 +7,9 @@ import { ticketPath } from '@/paths';
 
 /** Holds the icon SVGS */
 const TICKET_ICONS = {
-    OPEN: <LucideBriefcaseBusiness />,
-    IN_PROGRESS: <LucideLoader />,
-    DONE: <LucideCircleCheckBig />,
+    OPEN: <LucideEyeClosed />,
+    IN_PROGRESS: <LucideEye />,
+    DONE: <LucideCircleCheck />,
 }
 
 const TicketsPage = () => {
