@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ticketPath } from "@/paths";
 import { TICKET_ICONS } from "../constants";
 import { Ticket } from "../type";
@@ -10,7 +10,8 @@ type TicketItemProps = {
 
 const TicketItem = ({ ticket }: TicketItemProps) => {
     return (
-            <Card className='w-full max-w-[420px]'>
+        <div className="w-full max-w-[420px] flex gap-x-2">
+            <Card className='w-full'>
                 {/* [ticket.status] is mapped against TICKET_ICONS because the initialTickets holds the actual status of the ticket and TICKET_ICONS holds the related SVG */}
                 <CardHeader>
                     <CardTitle className='flex gap-2 items-center'>
@@ -21,10 +22,16 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
                 <CardContent>
                     <span className='line-clamp-3 whitespace-break-spaces'>{ticket.content}</span>
                 </CardContent>
-                <CardFooter>
-                    <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
-                </CardFooter>
-            </Card>  
+            </Card>
+            <div className="flex flex-col gap-y-2">
+                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
+                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
+                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
+                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
+                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
+            </div>
+        </div>
+
     )
 }
 
