@@ -11,6 +11,11 @@ type TicketItemProps = {
 }
 
 const TicketItem = ({ ticket }: TicketItemProps) => {
+    const viewTicketBtn = (
+        <Link href={ticketPath(ticket.id)} className={buttonVariants({ variant: 'outline', size: 'icon'})}>
+        <LucideCircleArrowOutUpRight />
+        </Link>
+    )
     return (
         <div className="w-full max-w-[420px] flex gap-x-1">
             <Card className='w-full'>
@@ -26,9 +31,7 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
                 </CardContent>
             </Card>
             <div className="flex flex-col gap-y-2">
-                <Link href={ticketPath(ticket.id)} className={buttonVariants({ variant: 'outline', size: 'icon'})}>
-                <LucideCircleArrowOutUpRight />
-                </Link>
+                {viewTicketBtn}
             </div>
         </div>
 
