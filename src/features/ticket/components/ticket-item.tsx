@@ -1,4 +1,6 @@
+import { LucideCircleArrowOutUpRight } from "lucide-react";
 import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ticketPath } from "@/paths";
 import { TICKET_ICONS } from "../constants";
@@ -10,7 +12,7 @@ type TicketItemProps = {
 
 const TicketItem = ({ ticket }: TicketItemProps) => {
     return (
-        <div className="w-full max-w-[420px] flex gap-x-2">
+        <div className="w-full max-w-[420px] flex gap-x-1">
             <Card className='w-full'>
                 {/* [ticket.status] is mapped against TICKET_ICONS because the initialTickets holds the actual status of the ticket and TICKET_ICONS holds the related SVG */}
                 <CardHeader>
@@ -24,11 +26,9 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
                 </CardContent>
             </Card>
             <div className="flex flex-col gap-y-2">
-                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
-                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
-                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
-                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
-                <Link href={ticketPath(ticket.id)} className='underline text-lg'>View</Link>
+                <Link href={ticketPath(ticket.id)} className={buttonVariants({ variant: 'outline', size: 'icon'})}>
+                <LucideCircleArrowOutUpRight />
+                </Link>
             </div>
         </div>
 
