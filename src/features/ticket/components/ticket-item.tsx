@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { LucideCircleArrowOutUpRight } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
@@ -8,16 +9,20 @@ import { Ticket } from "../type";
 
 type TicketItemProps = {
     ticket: Ticket;
+    isDetail?: boolean;
 }
 
-const TicketItem = ({ ticket }: TicketItemProps) => {
+const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
     const viewTicketBtn = (
         <Link href={ticketPath(ticket.id)} className={buttonVariants({ variant: 'outline', size: 'icon'})}>
         <LucideCircleArrowOutUpRight />
         </Link>
     )
     return (
-        <div className="w-full max-w-[420px] flex gap-x-1">
+        <div className={clsx("w-full flex gap-x-1", {
+            "max-w-[580px]": isDetail,
+            "max-w-[420px]": !isDetail,
+        })}>
             <Card className='w-full'>
                 {/* [ticket.status] is mapped against TICKET_ICONS because the initialTickets holds the actual status of the ticket and TICKET_ICONS holds the related SVG */}
                 <CardHeader>
@@ -27,12 +32,16 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <span className='line-clamp-3 whitespace-break-spaces'>{ticket.content}</span>
+                    <span className={clsx("whitespace-break-spaces", {
+                        "line-clamp-3": !isDetail,
+                    })}>{ticket.content}</span>
                 </CardContent>
             </Card>
-            <div className="flex flex-col gap-y-2">
-                {viewTicketBtn}
-            </div>
+            { isDetail ? null : 
+                <div className="flex flex-col gap-y-2">
+                    {viewTicketBtn}
+                </div>
+            }
         </div>
 
     )

@@ -1,5 +1,6 @@
 import { Placeholder } from "@/components/placeholder";
 import { initialTickets } from "@/data";
+import { TicketItem } from "@/features/ticket/components/ticket-item";
 import { ticketsPath } from "@/paths";
 
 type TicketPageProps = {
@@ -18,6 +19,7 @@ const TicketPage = async ({ params }: TicketPageProps) => {
     /** Represents individual ticket data object */
     const ticket = initialTickets.find((ticket) => ticket.id === ticketId);
 
+
     if (!ticket) {
         return (
             <Placeholder 
@@ -28,10 +30,10 @@ const TicketPage = async ({ params }: TicketPageProps) => {
         )}
 
     return (
-        <div>
-            <h2 className="text-3xl">{ticket.title}</h2>
-            <h3>{ticket.content}</h3>
+        <div className="flex justify-center animate-fade-from-top">
+            <TicketItem ticket={ticket} isDetail />
         </div>
+
     );
 };
 
