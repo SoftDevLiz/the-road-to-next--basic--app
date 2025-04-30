@@ -5,7 +5,7 @@ type ThemeProviderProps = {
 }
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
-return <BaseThemeProvider>{children}</BaseThemeProvider>
+return <BaseThemeProvider attribute="class" defaultTheme="system" enableSystem>{children}</BaseThemeProvider>
 }
 
 export { ThemeProvider };
