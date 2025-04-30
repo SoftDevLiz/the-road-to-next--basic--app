@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { Placeholder } from "@/components/placeholder";
+import { buttonVariants } from "@/components/ui/button";
 import { initialTickets } from "@/data";
 import { TicketItem } from "@/features/ticket/components/ticket-item";
 import { ticketsPath } from "@/paths";
@@ -24,8 +26,7 @@ const TicketPage = async ({ params }: TicketPageProps) => {
         return (
             <Placeholder 
             label="Ticket not found"
-            buttonPath={ticketsPath}
-            buttonLabel="Go to Tickets"
+            button={<Link href={ticketsPath} className={buttonVariants({ variant: "outline"})}>Back to Tickets</Link>}
             />
         )}
 
