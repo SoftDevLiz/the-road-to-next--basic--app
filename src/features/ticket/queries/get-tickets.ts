@@ -1,7 +1,8 @@
 import { initialTickets } from "@/data"
+import { Ticket } from "../type"
 
 // Simulate data fetching
-export const getTickets = async () => {
+export const getTickets = async (): Promise<Ticket[]> => {
 
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
