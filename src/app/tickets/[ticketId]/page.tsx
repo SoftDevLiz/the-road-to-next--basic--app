@@ -1,9 +1,8 @@
-import Link from "next/link";
-import { Placeholder } from "@/components/placeholder";
-import { buttonVariants } from "@/components/ui/button";
+
+import { notFound } from "next/navigation";
 import { TicketItem } from "@/features/ticket/components/ticket-item";
 import { getTicket } from "@/features/ticket/queries/get-ticket";
-import { ticketsPath } from "@/paths";
+
 
 type TicketPageProps = {
     params: Promise<{
@@ -18,12 +17,10 @@ const TicketPage = async ({ params }: TicketPageProps) => {
     const ticket = await getTicket(ticketId);
 
     if (!ticket) {
-        return (
-            <Placeholder 
-            label="Ticket not found"
-            button={<Link href={ticketsPath} className={buttonVariants({ variant: "outline"})}>Back to Tickets</Link>}
-            />
-        )}
+        // notFound() is a built in Next function that returns a 404 page.
+        // I have customised it to return a custom error page. See app/not-found.tsx.
+        return notFound();
+    }
 
     return (
         <div className="flex justify-center animate-fade-from-top">
