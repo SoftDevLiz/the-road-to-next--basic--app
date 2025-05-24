@@ -1,4 +1,3 @@
-"use client";
 import clsx from "clsx";
 import { LucideCircleArrowOutUpRight, LucideTrash } from "lucide-react";
 import Link from "next/link";
@@ -21,15 +20,12 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
         </Link>
     )
 
-    const handleDeleteTicket = async () => {
-        await deleteTicket(ticket.id);
-    }
-
     const deleteTicketBtn = (
-        // eslint-disable-next-line 
-        <Button onClick={handleDeleteTicket}>
-            <LucideTrash />
-        </Button>
+        <form action={deleteTicket.bind(null, ticket.id)}>
+            <Button variant="outline" size="icon">
+                <LucideTrash className="h-4 w-4"/>
+            </Button>
+        </form>
     )
 
     return (
