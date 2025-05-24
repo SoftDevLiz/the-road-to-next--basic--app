@@ -1,10 +1,12 @@
+"use client";
 import clsx from "clsx";
-import { LucideCircleArrowOutUpRight } from "lucide-react";
+import { LucideCircleArrowOutUpRight, LucideTrash } from "lucide-react";
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Ticket } from "@/generated/prisma/client";
 import { ticketPath } from "@/paths";
+import { deleteTicket } from "../actions/delete-ticket";
 import { TICKET_ICONS } from "../constants";
 
 type TicketItemProps = {
@@ -18,11 +20,25 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
         <LucideCircleArrowOutUpRight />
         </Link>
     )
+
+    const handleDeleteTicket = async () => {
+        await deleteTicket(ticket.id);
+    }
+
+    const deleteTicketBtn = (
+        // eslint-disable-next-line 
+        <Button onClick={handleDeleteTicket}>
+            <LucideTrash />
+        </Button>
+    )
+
     return (
+
         <div className={clsx("w-full flex gap-x-1", {
             "max-w-[580px]": isDetail,
             "max-w-[420px]": !isDetail,
         })}>
+            
             <Card className='w-full'>
                 {/* [ticket.status] is mapped against TICKET_ICONS because the initialTickets holds the actual status of the ticket and TICKET_ICONS holds the related SVG */}
                 <CardHeader>
@@ -37,13 +53,12 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
                     })}>{ticket.content}</span>
                 </CardContent>
             </Card>
-            { isDetail ? null : 
-                <div className="flex flex-col gap-y-2">
-                    {viewTicketBtn}
-                </div>
-            }
-        </div>
 
+            <div className="flex flex-col gap-y-2">
+                { isDetail ? deleteTicketBtn : viewTicketBtn }
+            </div>
+
+        </div>
     )
 }
 
