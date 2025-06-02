@@ -24,6 +24,9 @@ const tickets = [
 ]
 
 const seed = async () => {
+    // Delete prev seeded tickets
+    await prisma.ticket.deleteMany();
+    // Seed new tickets in db
     await prisma.ticket.createMany({
         data: tickets
     })

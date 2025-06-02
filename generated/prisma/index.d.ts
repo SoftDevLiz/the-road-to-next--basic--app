@@ -2059,7 +2059,7 @@ export namespace Prisma {
   }
 
   export type TicketCreateInput = {
-    id: string
+    id?: string
     createdAt?: Date | string
     updatedAt: Date | string
     title: string
@@ -2068,7 +2068,7 @@ export namespace Prisma {
   }
 
   export type TicketUncheckedCreateInput = {
-    id: string
+    id?: string
     createdAt?: Date | string
     updatedAt: Date | string
     title: string
@@ -2095,7 +2095,7 @@ export namespace Prisma {
   }
 
   export type TicketCreateManyInput = {
-    id: string
+    id?: string
     createdAt?: Date | string
     updatedAt: Date | string
     title: string
