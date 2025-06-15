@@ -4,7 +4,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ticketPath } from "@/paths";
-import { Ticket } from "../../../../generated/prisma/client";
+import { Ticket } from "../../../../node_modules/generated/prisma/client";
 import { TICKET_ICONS } from "../constants";
 
 type TicketItemProps = {

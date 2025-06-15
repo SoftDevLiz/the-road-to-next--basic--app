@@ -2,10 +2,10 @@
 // It ensures that the same instance is reused during development to avoid exhausting database connections. 
 // In production, a new instance is created for each request.
 
-import { PrismaClient } from "../../generated/prisma/client";
+import { PrismaClient } from "../../node_modules/generated/prisma/client";
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
-
+// eslint-disable-next-line
 export const prisma = globalForPrisma.prisma || new PrismaClient();
-
+// eslint-disable-next-line
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
