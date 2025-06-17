@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import { Ticket } from "../../../../generated/prisma/client"
+import { Ticket } from "../../../../node_modules/generated/prisma/client"
 
 // fetch tickets from db via Prisma
 export const getTickets = async (): Promise<Ticket[]> => {
