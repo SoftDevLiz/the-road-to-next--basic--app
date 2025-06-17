@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import { LucideCircleArrowOutUpRight, LucideTrash } from "lucide-react";
 import Link from "next/link";
@@ -27,17 +25,12 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
     }
 
     const deleteTicketBtn = (
-        /* The snippet: 
-        
-            onClick={() => { void handleDeleteTicket(); }} 
-
-        We write it like this because onClick expects expects a function that returns void,
-        but handleDeleteTicket is an async function. This way we are telling TypeScript that we are aware of this, and it will not throw an error.
-        
-        */
-        <Button variant={'outline'} size={'icon'} onClick={() => { void handleDeleteTicket(); }}> 
-            <LucideTrash />
-        </Button>
+        // Use html form element to pass it a server action in order to keep this a server side component!
+        <form action={handleDeleteTicket.bind(null, ticket.id)}>
+            <Button variant={'outline'} size={'icon'}> 
+                <LucideTrash />
+            </Button>
+        </form>
     )
 
     return (
