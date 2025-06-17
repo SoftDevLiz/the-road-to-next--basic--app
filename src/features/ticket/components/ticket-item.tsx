@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import { LucideCircleArrowOutUpRight } from "lucide-react";
+import { LucideCircleArrowOutUpRight, LucideTrash } from "lucide-react";
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ticketPath } from "@/paths";
 import { Ticket } from "../../../../node_modules/generated/prisma/client";
@@ -18,6 +18,13 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
         <LucideCircleArrowOutUpRight />
         </Link>
     )
+
+const deleteTicketBtn = (
+    <Button variant={'outline'} size={'icon'}>
+        <LucideTrash />
+    </Button>
+)
+
     return (
         <div className={clsx("w-full flex gap-x-1", {
             "max-w-[580px]": isDetail,
@@ -37,13 +44,11 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
                     })}>{ticket.content}</span>
                 </CardContent>
             </Card>
-            { isDetail ? null : 
-                <div className="flex flex-col gap-y-2">
-                    {viewTicketBtn}
-                </div>
-            }
-        </div>
 
+            <div className="flex flex-col gap-y-2">
+                { isDetail ? deleteTicketBtn : viewTicketBtn }
+            </div>
+        </div>
     )
 }
 

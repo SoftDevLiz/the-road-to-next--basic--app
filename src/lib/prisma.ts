@@ -5,7 +5,7 @@
 import { PrismaClient } from "../../node_modules/generated/prisma/client";
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
-// eslint-disable-next-line
+
 export const prisma = globalForPrisma.prisma || new PrismaClient();
-// eslint-disable-next-line
+
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
