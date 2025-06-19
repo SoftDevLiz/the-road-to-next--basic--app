@@ -2,18 +2,18 @@
 
 // Server action for deleting a ticket based on ID
 
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { ticketsPath } from "@/paths";
 
 export const deleteTicket = async (id: string) => {
-    try {
-        await prisma.ticket.delete({
-            where: {
-                id,
-            },
-        });
-    } catch (error) {
-        console.error("Error deleting ticket:", error);
-        throw new Error("Failed to delete ticket");
-    }
+
+    await prisma.ticket.delete({
+        where: {
+            id,
+        },
+    });
+
+    redirect(ticketsPath)
 };
 
