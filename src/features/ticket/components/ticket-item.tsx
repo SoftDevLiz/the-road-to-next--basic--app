@@ -20,13 +20,9 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
         </Link>
     )
 
-    const handleDeleteTicket = async () => {
-        await deleteTicket(ticket.id);
-    }
-
     const deleteTicketBtn = (
         // Use html form element to pass it a server action in order to keep this a server side component!
-        <form action={handleDeleteTicket.bind(null, ticket.id)}>
+        <form action={deleteTicket.bind(null, ticket.id)}>
             <Button variant={'outline'} size={'icon'}> 
                 <LucideTrash />
             </Button>
