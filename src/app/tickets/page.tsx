@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Heading } from '@/components/heading'
 import { Spinner } from '@/components/spinner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CreateTicketForm } from '@/features/ticket/components/create-ticket-form';
 import TicketList from '@/features/ticket/components/ticket-list';
 
 const TicketsPage = () => {
