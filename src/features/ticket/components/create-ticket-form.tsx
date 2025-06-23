@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { createTicket } from "../actions/create-ticket";
 
+// Using Shadcn form components
 const CreateTicketForm = () => {
     return (
         <form action={createTicket} className="flex flex-col gap-y-2">
