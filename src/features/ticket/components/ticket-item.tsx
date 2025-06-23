@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { LucideCircleArrowOutUpRight, LucideTrash } from "lucide-react";
+import { LucideCircleArrowOutUpRight, LucidePencil, LucideTrash } from "lucide-react";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ticketPath } from "@/paths";
+import { ticketEditPath,ticketPath } from "@/paths";
 import { Ticket } from "../../../../node_modules/generated/prisma/client";
 import { deleteTicket } from "../actions/delete-ticket";
 import { TICKET_ICONS } from "../constants";
@@ -29,6 +29,14 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
         </form>
     )
 
+    const editTicketBtn = (
+        <form>
+            <Link prefetch href={ticketEditPath(ticket.id)} className={buttonVariants({ variant: 'outline', size: 'icon'})}>
+                <LucidePencil />
+            </Link>
+        </form>
+    )
+
     return (
         <div className={clsx("w-full flex gap-x-1", {
             "max-w-[580px]": isDetail,
@@ -50,6 +58,7 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
             </Card>
             {/* Renders different buttons based on whether it's the detailed view or not */}
             <div className="flex flex-col gap-y-2">
+                {editTicketBtn}
                 { isDetail ? deleteTicketBtn : viewTicketBtn }
             </div>
         </div>
