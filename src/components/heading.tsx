@@ -6,6 +6,7 @@ type HeadingProps = {
 }
 
 const Heading = ({ title, description }: HeadingProps ) => {
+
     return (
         <>
         <div className='px-8'>
@@ -16,8 +17,8 @@ const Heading = ({ title, description }: HeadingProps ) => {
         </div>
         <Separator />
         </>
-
     )
+    
 }
 
 export { Heading };

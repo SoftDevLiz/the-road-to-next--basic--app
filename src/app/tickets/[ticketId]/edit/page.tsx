@@ -1,11 +1,13 @@
-import { Header } from "../../../../components/header"
+import { Heading } from "@/components/heading";
 
 const EditTicketPage = () => {
+
     return (
         <div>
-            < Header />
+            <Heading title="Edit Ticket" description="Edit this ticket" />
         </div>
     )
+    
 };
 
 export default EditTicketPage;
