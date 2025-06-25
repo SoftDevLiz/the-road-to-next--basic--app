@@ -1,3 +1,7 @@
+"use client";
+
+import { LucideLoader } from "lucide-react";
+import { useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,9 +17,16 @@ type TicketUpsertFormProps = {
 
 /** Form for user to fill in to update existing or create a new ticket. Calls upsertTicket server action when submitted. */
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
+    const [ isPending, startTransition ] = useTransition();
+    
+    const upsertTicketAction = (formData: FormData) => {
+        startTransition( async () => {
+            await upsertTicket.bind(null, ticket?.id)(formData)
+        })
+    }
 
     return (
-        <form action={upsertTicket.bind(null, ticket?.id)} className="flex flex-col gap-y-2">
+        <form action={upsertTicketAction} className="flex flex-col gap-y-2">
 
             <Label htmlFor="title">Title</Label>
             <Input id="title" name="title" type="text" defaultValue={ticket?.title}/>
@@ -23,7 +34,10 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
             <Label htmlFor="content">Content</Label>
             <Textarea id="content" name="content" defaultValue={ticket?.content}/>
 
-            <Button type="submit">{ ticket ? "Edit" : "Create" }</Button>
+            <Button type="submit">
+                { isPending && <LucideLoader className="animate-spin" /> }
+                { ticket ? "Edit" : "Create" }
+            </Button>
         
     </form>
     )
