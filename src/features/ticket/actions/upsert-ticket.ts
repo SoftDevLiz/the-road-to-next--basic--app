@@ -14,7 +14,7 @@ const ticketUpsertSchema = z.object({
 
 
 /** upsertTicket is a server action. Takes ticket id, actionState (useActionState hook in ticket-upsert-form) and other details from a form to update existing or create a new ticket */
-const upsertTicket = async (id: string | undefined, _actionState: {message: string}, formData: FormData) => {
+const upsertTicket = async (id: string | undefined, _actionState: {message: string, payload?: FormData }, formData: FormData) => {
 
     try {
         // Succintly extracts the title and content from the form and packs it nicely into a data object for use in in the prisma update call. Parse with Zod for form validation.
@@ -30,7 +30,11 @@ const upsertTicket = async (id: string | undefined, _actionState: {message: stri
             create: { ...data, updatedAt: new Date() },
         })
     } catch {
-        return { message: "Something went wrong" }
+        return { 
+            message: "Something went wrong",
+            // In case of error, return the title and content for the defaultValue for the input fields
+            payload: formData,
+                }
     }
 
 
