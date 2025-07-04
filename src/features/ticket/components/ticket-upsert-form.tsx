@@ -1,13 +1,12 @@
 "use client";
 
+import { useActionState } from "react";
 import SubmitButton from "@/components/form/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Ticket } from "../../../../node_modules/generated/prisma"
 import upsertTicket from "../actions/upsert-ticket";
-
-
 
 type TicketUpsertFormProps = {
     ticket?: Ticket;
@@ -17,9 +16,11 @@ type TicketUpsertFormProps = {
 
 /** Form for user to fill in to update existing or create a new ticket. Calls upsertTicket server action when submitted. */
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
+    // useActionState hook being used to give our upsertTicket server action a state, it takes the action and an initial state as arguments.
+    const [actionState, action] = useActionState(upsertTicket.bind(null, ticket?.id), { message: "" })
 
     return (
-        <form action={upsertTicket.bind(null, ticket?.id)} className="flex flex-col gap-y-2">
+        <form action={action} className="flex flex-col gap-y-2">
 
             <Label htmlFor="title">Title</Label>
             <Input id="title" name="title" type="text" defaultValue={ticket?.title}/>
@@ -28,7 +29,8 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
             <Textarea id="content" name="content" defaultValue={ticket?.content}/>
 
             <SubmitButton label={ticket ? "Update" : "Create"}/>
-        
+
+            {actionState.message}
     </form>
     )
 }
