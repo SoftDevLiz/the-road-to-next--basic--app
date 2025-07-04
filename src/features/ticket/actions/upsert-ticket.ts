@@ -3,18 +3,19 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import * as z from "zod/v4";
+import { ActionState, fromErrorToActionState } from "@/components/form/utils/error-to-action";
 import { prisma } from "@/lib/prisma";
 import { ticketPath, ticketsPath } from "@/paths";
 
 // Zod validation rules
 const ticketUpsertSchema = z.object({
-    title: z.string().min(1).max(191),
-    content: z.string().min(1).max(191)
+    title: z.string().min(1, "title can't be empty").max(191),
+    content: z.string().min(1, "content can't be empty").max(1024)
 })
 
 
 /** upsertTicket is a server action. Takes ticket id, actionState (useActionState hook in ticket-upsert-form) and other details from a form to update existing or create a new ticket */
-const upsertTicket = async (id: string | undefined, _actionState: {message: string, payload?: FormData }, formData: FormData) => {
+const upsertTicket = async (id: string | undefined, _actionState: ActionState, formData: FormData) => {
 
     try {
         // Succintly extracts the title and content from the form and packs it nicely into a data object for use in in the prisma update call. Parse with Zod for form validation.
@@ -29,12 +30,8 @@ const upsertTicket = async (id: string | undefined, _actionState: {message: stri
             update: { ...data, updatedAt: new Date() },
             create: { ...data, updatedAt: new Date() },
         })
-    } catch {
-        return { 
-            message: "Something went wrong",
-            // In case of error, return the title and content for the defaultValue for the input fields
-            payload: formData,
-                }
+    } catch (error) {
+        return fromErrorToActionState(error, formData);
     }
 
 
