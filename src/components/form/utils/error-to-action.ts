@@ -6,12 +6,14 @@ export type ActionState = {
     payload?: FormData 
 }
 
+export const EMPTY_ACTION_STATE: ActionState =  { message: "", fieldErrors: {} };
+
 /** Returns errors from zod, db, or unknown source to the action state so we have feedback on what a potential issue might be at the end of the action lifecycle */
 export const fromErrorToActionState = (error: unknown, formData: FormData): ActionState => {
     // if input field validation error... 
     if (error instanceof z.ZodError) {
     const flatErr = z.flattenError(error)
-        
+
         return { 
             message: error.issues[0].message,
             fieldErrors: flatErr.fieldErrors,
@@ -32,7 +34,10 @@ export const fromErrorToActionState = (error: unknown, formData: FormData): Acti
             payload: formData
         }
     }
+}
 
+export const toActionState =  (message: string): ActionState => {
+    return { message, fieldErrors: {} }
 }
 
 

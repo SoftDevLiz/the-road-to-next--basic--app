@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import * as z from "zod/v4";
-import { ActionState, fromErrorToActionState } from "@/components/form/utils/error-to-action";
+import { ActionState, fromErrorToActionState, toActionState } from "@/components/form/utils/error-to-action";
 import { prisma } from "@/lib/prisma";
 import { ticketPath, ticketsPath } from "@/paths";
 
@@ -43,7 +43,7 @@ const upsertTicket = async (id: string | undefined, _actionState: ActionState, f
     }
 
     // Returns a happy state if everything in the try block validated and ran
-    return { message: "Ticket created!", fieldErrors: {} }
+    return toActionState("Ticket created")
 }
 
 export default upsertTicket;
