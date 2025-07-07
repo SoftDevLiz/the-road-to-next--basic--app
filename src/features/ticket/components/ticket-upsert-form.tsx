@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import FieldError from "@/components/form/field-error";
 import SubmitButton from "@/components/form/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,20 +18,20 @@ type TicketUpsertFormProps = {
 /** Form for user to fill in to update existing or create a new ticket. Calls upsertTicket server action when submitted. */
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
     // useActionState hook being used to give our upsertTicket server action a state, it takes the action and an initial state as arguments.
-    const [actionState, action] = useActionState(upsertTicket.bind(null, ticket?.id), { message: "" })
+    const [actionState, action] = useActionState(upsertTicket.bind(null, ticket?.id), { message: "", fieldErrors: {} })
 
     return (
         <form action={action} className="flex flex-col gap-y-2">
 
             <Label htmlFor="title">Title</Label>
             <Input id="title" name="title" type="text" defaultValue={(actionState.payload?.get("title") as string ) ?? ticket?.title}/>
+            <FieldError actionState={actionState} fieldName="title"/>
 
             <Label htmlFor="content">Content</Label>
             <Textarea id="content" name="content" defaultValue={(actionState.payload?.get("content") as string ) ?? ticket?.content}/>
+            <FieldError actionState={actionState} fieldName="content"/>
 
             <SubmitButton label={ticket ? "Update" : "Create"}/>
-
-            {actionState.message}
     </form>
     )
 }

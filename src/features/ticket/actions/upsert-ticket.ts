@@ -9,8 +9,8 @@ import { ticketPath, ticketsPath } from "@/paths";
 
 // Zod validation rules
 const ticketUpsertSchema = z.object({
-    title: z.string().min(1, "title can't be empty").max(191),
-    content: z.string().min(1, "content can't be empty").max(1024)
+    title: z.string().min(1, "Title can't be empty, you need at least one character").max(191),
+    content: z.string().min(1, "Content can't be empty, you need at least one character").max(1024)
 })
 
 
@@ -43,7 +43,7 @@ const upsertTicket = async (id: string | undefined, _actionState: ActionState, f
     }
 
     // Returns a happy state if everything in the try block validated and ran
-    return { message: "Ticket created!"}
+    return { message: "Ticket created!", fieldErrors: {} }
 }
 
 export default upsertTicket;
