@@ -43,7 +43,7 @@ const upsertTicket = async (id: string | undefined, _actionState: ActionState, f
     }
 
     // Returns a happy state if everything in the try block validated and ran
-    return toActionState("Ticket created")
+    return toActionState("SUCCESS", "Ticket created!")
 }
 
 export default upsertTicket;
