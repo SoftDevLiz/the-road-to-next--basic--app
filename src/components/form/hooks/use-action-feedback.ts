@@ -10,5 +10,13 @@ type UseActionFeedbackOptions = {
  * The options param is the onSuccess or onError functions that you want to run depending on the state, which is passed from the outside.
  */
 export const useActionFeedback = (actionState: ActionState, options: UseActionFeedbackOptions) => {
-    useEffect(options.onSuccess?.(), [actionState, options])
+    useEffect(() => {
+
+        if (actionState.status === "SUCCESS") {
+            options.onSuccess?.()
+        } else if (actionState.status === "ERROR") {
+            options.onError?.()
+        }
+        
+    }, [actionState, options])
 }
