@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import { Header } from '@/components/header'
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
             flex 
             flex-col
           '>{children}</main>
+          <Toaster expand richColors />
         </ThemeProvider>
       </body>
     </html>
