@@ -23,8 +23,8 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
     const [actionState, action] = useActionState(upsertTicket.bind(null, ticket?.id), EMPTY_ACTION_STATE)
 
     useActionFeedback(actionState, {
-        onSuccess: () => {},
-        onError: () => {},
+        onSuccess: ({ actionState }) => {console.log(actionState.message)},
+        onError: ({ actionState }) => {console.log(actionState.message)},
     });
 
     return (
